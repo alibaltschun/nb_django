@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} Train {% endblock %}
+
+{% block body %}
+
+    {% if messages %}
+        {% for m in messages %}
+            <div>
+                <strong>{{m|safe}}</strong>
+            </div>
+        {% endfor %}
+    {% else %}
+    <div class="container" style="margin-top: 50px;">
+        
+        <center><h5> Ekstrasi Informasi halaman web</h5></center>
+        <h3>Pelatihan Data</h3>
+        <div class="card" style="padding: 12px;">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h6>Pilih Data latih</h6>
+                <input type="file" class="form-control-file border"name="file" >
+                <br>
+                <button type="submit" class="btn btn-primary">Proses</button>
+                <a class="btn btn-secondary" href="{% url 'train' %}"> Batal </a>
+                <br>
+                <br>
+                {{info}}
+                <br>
+                <strong> {{err_info}} </strong>
+            </form>
+        </div>
+    </div>
+    
+    <div class="container" style="margin-top: 50px;">
+        
+        <h3>Data latih</h3>
+        <div>
+            <table class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                <th>Label</th>
+                <th>Text</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+                    <tr>
+                    <td>{{d.label}}</td>
+                    <td>{{d.text}}</td>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+    </div>
+        
+
+    {% endif %}
+
+{% endblock %}
