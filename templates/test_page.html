@@ -39,11 +39,10 @@
             <table class="table table-bordered table-sm">
             <thead>
                 <tr>
-                    <th>Dockumen ke</th>
+                    <th>kalimat ke</th>
                     <th>hasil prediksi kelas</th>
                     <th>aktual kelas</th>
                     <th>Text</th>
-                    <th>is_valid</th>                
                 </tr>
             </thead>
             <tbody>
@@ -53,7 +52,6 @@
                     <td>{{d.y_pred}}</td>
                     <td>{{d.label}}</td>
                     <td>{{d.text}}</td>
-                    <td>{{d.is_valid}}</td>
                 {% endfor %}
             </tbody>
             </table>
@@ -90,7 +88,7 @@
             <thead>
                 <tr>
                 <th>sebelum</th>
-                <th>sesudah (date,allcaps,digit,akro,:,18)</th>
+                <th>sesudah (date,allcaps,digit,place,:,18)</th>
                 </tr>
             </thead>
             <tbody>
@@ -105,10 +103,7 @@
     </div>
 
     <div class="container" style="margin-top: 50px;">
-        
-        <h3>Accuracy testing : {{ accuracy_val }} %</h3>
-        <h3>Accuracy validasi: {{ accuracy_test }} %</h3>
-        
+        <h3>Accuracy testing : {{ accuracy_test }} %</h3>        
     </div>
 
     <br>

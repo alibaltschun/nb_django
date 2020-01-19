@@ -98,17 +98,17 @@ def test(request):
 
     for column in csv.reader(io_string,delimiter=',', quotechar="|"):
         _ , y_pred = model.testing(column[0],column[1])
-        data.append({"label":column[1],"text":column[0],"is_valid":column[2],
-        "text_token": column[0].split(" "),
+        data.append({"label":column[1],"text":column[0],
+        "text_token": model.tokenization(column[0]),
         "text_vector":model.text_to_vector(column[0]),
         "y_pred" : y_pred[0],
         "index": i
         
         })
-        data_df.append([column[1],column[0],column[2]])
+        data_df.append([column[1],column[0]])
         i += 1
 
-    df = pandas.DataFrame(data_df,columns=["label","text","is_valid"])
+    df = pandas.DataFrame(data_df,columns=["label","text"])
     df = df.dropna()
     df.reset_index()
     df.to_csv("./static/datatest.csv", sep=',', encoding='utf-8',index=None)
@@ -116,8 +116,7 @@ def test(request):
     
     acc , y_pred = model.testing()
     context = {"data": data,
-                "accuracy_val": acc[0]*100,
-                "accuracy_test": acc[1]*100 }
+                "accuracy_test": acc*100 }
     return render(request, template, context)
     #     except:
     #         propt = {
